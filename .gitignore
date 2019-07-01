@@ -1,0 +1,15 @@
+backup/
+texfiles/introduction/introduction.tex
+*.aux
+*.dvi
+.DS_Store
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.sta
+*.synctex.gz
+*.toc
+*.pdf
