@@ -1,0 +1,142 @@
+\documentclass[dvipdfmx,12pt,notheorems]{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.pathreplacing,quotes,positioning,shapes,fit,arrows,backgrounds,tikzmark}
+%\pgfdeclarelayer{background}
+%\pgfsetlayers{background}
+%%%% 和文用 %%%%%
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{minijs}%和文用
+\usepackage{latexsym}
+\usepackage[deluxe,expert]{otf}
+\renewcommand{\kanjifamilydefault}{\gtdefault}%和文用
+
+%%%% スライドの見た目 %%%%%
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent=0}%好みに応じてどうぞ）
+\setbeamertemplate{footline}[page number]
+\setbeamerfont{footline}{size=\footnotesize,series=\bfseries}
+\setbeamercolor{footline}{fg=black,bg=black}
+\usepackage{multicol}
+\colorlet{mycolor}{orange!80!black}
+\usepackage{caption}
+\captionsetup[figure]{format=plain, labelformat=empty, labelsep=none}
+\renewcommand{\figurename}{}
+%%%%
+
+%%%% 定義環境 %%%%%
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem{definition}{定義}
+\newtheorem{proposition}{命題}
+\newtheorem{lemma}{補題}
+\newtheorem{corollary}{系}
+\newtheorem{conjecture}{予想}
+\newtheorem*{remark}{Remark}
+\renewcommand{\proofname}{}
+%%%%%%%%%
+
+%%%%% フォント基本設定 %%%%%
+\usepackage[T1]{fontenc}%8bit フォント
+\usepackage{textcomp}%欧文フォントの追加
+\usepackage[utf8]{inputenc}%文字コードをUTF-8
+\usepackage{txfonts}%数式・英文ローマン体を txfont にする
+\usepackage{bm}%数式太字
+%%%%%%%%%%
+
+%%%% 擬似コードパッケージ %%%%
+%\usepackage{algorithmicx}
+%\usepackage[ruled]{algorithm}
+%\usepackage{algpseudocode}
+%\makeatletter
+%\makeatother
+%%%% 条件文での改行を許す %%%%
+%\newcommand\CONDITION[2]%
+%	{\begin{tabular}[t]{@{}l@{}l@{}}
+%			#1&#2
+%		\end{tabular}%
+%	}
+%\algdef{SE}[IF]{If}{EndIf}[1]%
+%	{\algorithmicif\ \CONDITION{#1}{\ \algorithmicthen}}%
+%	{\algorithmicend\ \algorithmicif}%
+%\algdef{C}[IF]{IF}{ElsIf}[1]%
+%	{\algorithmicelse\ \algorithmicif\ \CONDITION{#1}{\ \algorithmicthen}}
+%%%%%%%%%
+%\algtext*{EndWhile}
+%\algtext*{EndIf}
+
+%%%% ファイル環境 %%%%
+\usepackage{subfiles}
+%%%%%%%%
+
+\AtBeginSection[]{
+  \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+  \setbeamercolor{section in toc}{fg=mycolor}
+  \setbeamercolor{subsection in toc shaded}{fg=black}
+  \setbeamercolor{subsection in toc}{fg=mycolor}
+  \setbeamercolor{subsubsection in toc shaded}{fg=black}
+  \setbeamercolor{subsubsection in toc}{fg=mycolor}
+}
+
+\tikzset{%
+	elem/.style={circle,inner sep=0pt,minimum size=6mm},
+	a1/.style={elem},%
+	a2/.style={elem},%
+	a3/.style={elem},%
+	a4/.style={elem},%
+	a5/.style={elem},%
+}
+
+\newcommand{\func}[1]{\ensuremath\mathrm{#1}}
+\newcommand{\Min}{\func{\text{M\textsc{in}}}}
+\newcommand{\Max}{\func{\text{M\textsc{ax}}}}
+\newcommand{\Member}{\func{\text{M\textsc{ember}}}}
+\newcommand{\Successor}{\func{\text{S\textsc{uccessor}}}}
+\newcommand{\Predecessor}{\func{\text{P\textsc{redecessor}}}}
+\newcommand{\Insert}{\func{\text{I\textsc{nsert}}}}
+\newcommand{\Delete}{\func{\text{D\textsc{elete}}}}
+\newcommand{\TRUE}{\text{\textsc{true}}}
+\newcommand{\FALSE}{\text{\textsc{false}}}
+\newcommand{\NIL}{\text{\textsc{nil}}}
+\newcommand{\uniqnum}[1]{
+	(\foreach \i in {1,2,...,#1} {\onslide*<\i>{\i}}/#1)
+}
+\newcounter{Cntr}
+\newcommand{\putarray}[2][0]{
+	\setcounter{Cntr}{#1}
+	\foreach \i in {#2} {
+		\node (a\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},.5) {$\i$};
+		\node (idx\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},-.25) {{\tiny$\the\value{Cntr}$}};
+		\addtocounter{Cntr}{1}
+	%	\node (idx\i) [above =of a\i] {{\i-1}};
+	}
+}
+
+
+\title[略タイトル]{van Emde Boas Trees}
+\author[Mitsuyoshi]{光吉　健汰}
+\institute[IKN]{北海道大学工学部 情報エレクトロニクス学科 情報理工学コース 4年\\
+情報知識ネットワーク研究室}
+\date{\today}%日付
+
+\begin{document}
+
+\begin{frame}\frametitle{}
+\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[
+		%sectionstyle=show/shaded,
+		%subsectionstyle=show/show/shaded,
+		%subsubsectionstyle=show/show/show/shaded
+	]
+\end{frame}
+
+\end{document}
