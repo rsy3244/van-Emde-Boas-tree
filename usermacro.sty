@@ -1,0 +1,28 @@
+\ProvidesPackage{usermacro}
+%%%% 関数や定数マクロ %%%%
+\newcommand*{\COSTUMMACRO}{}
+\newcommand{\Func}[1]{\ensuremath\mathrm{#1}}
+\newcommand{\Min}{\Func{\text{M\textsc{in}}}}
+\newcommand{\Max}{\Func{\text{M\textsc{ax}}}}
+\newcommand{\Member}{\Func{\text{M\textsc{ember}}}}
+\newcommand{\Successor}{\Func{\text{S\textsc{uccessor}}}}
+\newcommand{\Predecessor}{\Func{\text{P\textsc{redecessor}}}}
+\newcommand{\Insert}{\Func{\text{I\textsc{nsert}}}}
+\newcommand{\Delete}{\Func{\text{D\textsc{elete}}}}
+\newcommand{\TRUE}{\text{\textsc{true}}}
+\newcommand{\FALSE}{\text{\textsc{false}}}
+\newcommand{\NIL}{\text{\textsc{nil}}}
+\newcommand{\uniqnum}[1]{
+	(\foreach \i in {1,2,...,#1} {\onslide*<\i>{\i}}/#1)
+}
+\newcounter{Cntr}
+\newcommand{\putarray}[2][0]{
+	\setcounter{Cntr}{#1}
+	\foreach \i in {#2} {
+		\node (a\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},.5) {$\i$};
+		\node (idx\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},-.25) {{\tiny$\the\value{Cntr}$}};
+		\addtocounter{Cntr}{1}
+	%	\node (idx\i) [above =of a\i] {{\i-1}};
+	}
+}
+%%%%%%%%

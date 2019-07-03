@@ -1,0 +1,13 @@
+\documentclass[dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+\begin{frame}\frametitle{平方分割木 改善}
+	平方分割木では, $sumary$, $cluster$が大きさ$\sqrt{u}$の配列を持つ.\\
+	\onslide+<2>{
+	$\to$ これらの配列を再帰的に管理できるデータ構造を考える.
+	\subimport{../resources/sqrt-tree/}{sqrt-tree-child}
+}
+\end{frame}
+\end{document}

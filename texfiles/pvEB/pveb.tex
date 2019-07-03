@@ -1,0 +1,23 @@
+\documentclass[dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+\begin{frame}\frametitle{proto van Emde Boas structures}
+	動的集合$v$を保持するproto van Emde Boas structuresを考える.
+	\begin{block}{proto van Emde Boas structures}
+		proto van Emde Boas structures(pvEB構造)とは, \\
+		$u$の値と$summary$, $cluster$に対応する\\ 
+		pvEB構造へのポインタを持つデータ構造
+		\begin{itemize}
+			\item ポインタの先のpvEB構造は$\sqrt{u}$個の要素を保持\\
+			\item $u = 2$の場合は, ポインタを持たず, $\{0, 1\}$の要素を保持\\
+			\item pvEB構造間で対応する要素の値が異なるので, \\
+				以下の式を用いてやり取りを行う.
+				\begin{description}[$index(x,y)$]
+					\item[$index(x,y)$] こんなかんじ\\
+				\end{description}
+		\end{itemize}
+	\end{block}
+\end{frame}
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass[dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+
+%%%% Tikz環境 %%%%
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.pathreplacing,quotes,positioning,shapes,fit,arrows,backgrounds,tikzmark}
+%%%%%%%%
+\usepackage{usermacro}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.5,
+	elem/.style={rectangle, fill=blue!10},
+	a0/.style={elem},
+	a1/.style={elem},
+	a2/.style={elem},
+	a3/.style={elem},
+	a8/.style={elem},
+	a9/.style={elem},
+	a10/.style={elem},
+	a11/.style={elem},
+	]
+	%\draw (0,0) grid (16,1);
+	\putarray{0,0,1,1,0,1,0,0,1,0,0,1,0,0,0,0}
+	\setcounter{Cntr}{0}
+	\foreach \i in {1,1,1,0} {
+		\node (r\the\value{Cntr}) at ({\the\value{Cntr}+6.5},3) {$\i$};
+		\node [above =-.1 of r\the\value{Cntr}] (rdx\the\value{Cntr}) {{\tiny$\the\value{Cntr}$}};
+		\addtocounter{Cntr}{1}%
+	}
+	\draw [thick] (a0.north west) rectangle (a15.south east);
+	\begin{scope}[on background layer]
+		\draw [fill=blue!5] (a0.north west) rectangle (a3.south east);
+		\draw [fill=blue!5] (a8.north west) rectangle (a11.south east);
+	\end{scope}
+	\foreach \i in {0,1,...,14} {
+		\draw (a\i.north east) to (a\i.south east);
+	}
+	\draw (r0.north west) rectangle (r3.south east);
+	\foreach \i in {0,1,2} {
+		\draw (r\i.north east) to (r\i.south east);
+	}
+	\draw (r0.south) to (a1.north east);
+	\draw (r1.south) to (a5.north east);
+	\draw (r2.south) to (a9.north east);
+	\draw (r3.south) to (a13.north east);
+	\draw [thick](a4.north west) to (a4.south west);
+	\draw [thick](a8.north west) to (a8.south west);
+	\draw [thick](a12.north west) to (a12.south west);
+	\foreach \i in {0,4,8,12} {
+		\pgfmathtruncatemacro{\j}{\i+3};
+		\draw[thick, decorate, decoration={brace,amplitude=.3cm}] (a\i.north west) -- (a\j.north east) node [black, midway, yshift=.5cm] {{\scriptsize $\structure{cluster}$}};
+	}
+	\node (summ) at ($(r3.east)+(2,.3)$) {{\scriptsize $\structure{summary}$}};
+	\draw [->] (summ) to (r3.east);
+\end{tikzpicture}
+\end{document}
+

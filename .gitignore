@@ -5,6 +5,7 @@ texfiles/introduction/introduction.tex
 .DS_Store
 *.fdb_latexmk
 *.fls
+*.fdb_latexmk
 *.log
 *.nav
 *.out

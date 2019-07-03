@@ -93,28 +93,28 @@
 	a5/.style={elem},%
 }
 
-\newcommand{\func}[1]{\ensuremath\mathrm{#1}}
-\newcommand{\Min}{\func{\text{M\textsc{in}}}}
-\newcommand{\Max}{\func{\text{M\textsc{ax}}}}
-\newcommand{\Member}{\func{\text{M\textsc{ember}}}}
-\newcommand{\Successor}{\func{\text{S\textsc{uccessor}}}}
-\newcommand{\Predecessor}{\func{\text{P\textsc{redecessor}}}}
-\newcommand{\Insert}{\func{\text{I\textsc{nsert}}}}
-\newcommand{\Delete}{\func{\text{D\textsc{elete}}}}
-\newcommand{\TRUE}{\text{\textsc{true}}}
-\newcommand{\FALSE}{\text{\textsc{false}}}
-\newcommand{\NIL}{\text{\textsc{nil}}}
-\newcommand{\uniqnum}[1]{
-	(\foreach \i in {1,2,...,#1} {\onslide*<\i>{\i}}/#1)
-}
-\newcounter{Cntr}
-\newcommand{\putarray}[2][0]{
-	\setcounter{Cntr}{#1}
-	\foreach \i in {#2} {
-		\node (a\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},.5) {$\i$};
-		\node (idx\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},-.25) {{\tiny$\the\value{Cntr}$}};
-		\addtocounter{Cntr}{1}
+%\newcommand{\func}[1]{\ensuremath\mathrm{#1}}
+%\newcommand{\Min}{\func{\text{M\textsc{in}}}}
+%\newcommand{\Max}{\func{\text{M\textsc{ax}}}}
+%\newcommand{\Member}{\func{\text{M\textsc{ember}}}}
+%\newcommand{\Successor}{\func{\text{S\textsc{uccessor}}}}
+%\newcommand{\Predecessor}{\func{\text{P\textsc{redecessor}}}}
+%\newcommand{\Insert}{\func{\text{I\textsc{nsert}}}}
+%\newcommand{\Delete}{\func{\text{D\textsc{elete}}}}
+%\newcommand{\TRUE}{\text{\textsc{true}}}
+%\newcommand{\FALSE}{\text{\textsc{false}}}
+%\newcommand{\NIL}{\text{\textsc{nil}}}
+%\newcommand{\uniqnum}[1]{
+%	(\foreach \i in {1,2,...,#1} {\onslide*<\i>{\i}}/#1)
+%}
+%\newcounter{Cntr}
+%\newcommand{\putarray}[2][0]{
+%	\setcounter{Cntr}{#1}
+%	\foreach \i in {#2} {
+%		\node (a\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},.5) {$\i$};
+%		\node (idx\the\value{Cntr}) at ({\the\value{Cntr}-#1+.5},-.25) {{\tiny$\the\value{Cntr}$}};
+%		\addtocounter{Cntr}{1}
 	%	\node (idx\i) [above =of a\i] {{\i-1}};
-	}
-}
+%	}
+%}
 
