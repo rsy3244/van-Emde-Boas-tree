@@ -1,0 +1,20 @@
+\documentclass[dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage{usermacro}
+
+\begin{document}
+\begin{frame}\frametitle{pvEB構造 操作: $\Member(V,x)$}
+	$summary$から対応する$cluster$が空か確認し,\\
+	空でないなら対応する$cluster$で$\Member(V,x)$を再帰的に呼び出す.
+
+	\begin{figure}\resizebox{\textwidth}{!}{
+			\subimport{../../resources/pvEB/}{member}
+		}
+		\caption{$\Member(V,5) V = \{2,3,5,8,11\}$}
+	\end{figure}
+	\begin{tikzpicture}[overlay]
+		\node[ellipse callout, thick, draw, fill=white, callout absolute pointer={(4.5,5)}] at (5,4) {$\Member(V,5)$};
+	\end{tikzpicture}
+\end{frame}
+\end{document}

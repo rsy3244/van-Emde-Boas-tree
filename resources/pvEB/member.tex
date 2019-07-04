@@ -126,11 +126,6 @@
 	\node[plane] at (cl3-0-element1) {$0$}; %13
 	\node[plane] at (cl3-1-element0) {$0$}; %14
 	\node[plane] at (cl3-1-element1) {$0$}; %15
-	\IfStandalone{}{
-	\node(summary-ellipse)[ellipse, ultra thick, draw=red, fit={($(summary-cluster1.north east)+(1,.5)$) ($(sum-sum-element1.south west)+(-1,-.5)$) ($(sum-cl1-element1)+(1,-1)$)}] {};
-	\node[ellipse callout, draw, fill=white, callout absolute pointer={(summary-ellipse.east)}, callout pointer arc=30] at ($(summary-ellipse.east) +(10,-2)$) {{\huge 平方分割木の$summary$に対応}};
-	}
-
 
 \end{tikzpicture}
 \end{document}
