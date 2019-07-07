@@ -91,6 +91,95 @@
   \setbeamercolor{subsubsection in toc}{fg=mycolor}
 }
 
+\tikzset{
+	plane/.style={
+		rectangle,
+		fill=white,
+		draw,
+		minimum size=1cm,
+	},
+	redline/.style={
+        thick,
+        draw=red,
+    },
+	highlight/.style={
+		plane,
+		fill=green!5,
+	},%
+%
+	pics/myCallout/.style args={#1 dir #2}{
+		code={
+			\node[ellipse callout, thick, draw, fill=white, callout absolute pointer={(0,0)}] at (#2) {#1};
+		},
+	},
+	pics/pvebset/.style args={#1 color #2}{
+		code={
+			\pgfmathtruncatemacro{\Usize}{#1 * #1}
+			\coordinate (-root) at (0,0);
+			\draw [pic actions, fill=#2!5](0,0) rectangle ($(4.5,2)+(#1,0)$);
+			\node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1,.5) {\Usize};
+			\node [above=.2 of -u] {$u$};
+			\node (-summary) [rectangle, draw, fill=white, minimum size=1cm] at (2.5,.5) {};
+			\node [above=.1 of -summary] {$summary$};
+			\foreach \i in {1,2,...,#1}{
+				\pgfmathtruncatemacro{\j}{\i-1}
+				\node (-cluster\j)[rectangle, draw, fill=white,minimum size=1cm] at ($(\j, 0)+(4.5,0.5)$) {};
+			}
+			\node [above=.1 of -cluster0.north east] {$cluster$};
+			\coordinate (-inp) at ({4.5/2+#1/2},2);
+		},
+	},
+	pics/pvebbase/.style args={color #1} {
+	   code={
+			\coordinate (-root) at (0,0);
+		   \draw [pic actions, fill=#1!5] (0,0) rectangle (2,5);
+		   \node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1.4, 4) {$2$};
+		   \node [left=.2 of -u] {$u$};
+		   \foreach \i in {0,1}{
+			   \node (-element\i) [rectangle, draw, fill=white, minimum size=1cm] at ($(1.4,2)-(0,\i)$) {};
+			   \node [left=.1 of -element\i] {$\i$};
+		   }
+		   \coordinate (-inp) at (1,5);
+	   },
+	},
+%
+	pics/vebset/.style args={#1 color #2}{
+		code={
+			\pgfmathtruncatemacro{\Usize}{#1 * #1}
+			\coordinate (-root) at (0,0);
+			\draw [pic actions, fill=#2!10](0,0) rectangle ($(4.5,3)+(#1,0)$);
+			\node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1,.5) {\Usize};
+			\node [above=.2 of -u] {$u$};
+			\node (-summary) [rectangle, draw, fill=white, minimum size=1cm] at (2.5,.5) {};
+			\node [above=.1 of -summary] {$summary$};
+			\node at (1.5, 2.3) {$min$};
+			\node (-min) [plane] at (2.5, 2.3) {};
+			\node at (4.5, 2.3) {$max$};
+			\node (-max) [plane] at (5.5, 2.3) {};
+			\foreach \i in {1,2,...,#1}{
+				\pgfmathtruncatemacro{\j}{\i-1}
+				\node (-cluster\j)[rectangle, draw, fill=white,minimum size=1cm] at ($(\j, 0)+(4.5,0.5)$) {};
+			}
+			\node [above=.1 of -cluster0.north east] {$cluster$};
+			\coordinate (-inp) at ({4.5/2+#1/2},3);
+		},
+	},
+	pics/vebbase/.style args={color #1} {
+	   code={
+			\draw [pic actions, fill=#1!10] (0,0) rectangle (2,5);
+			\coordinate (-root) at (0,0);
+			\node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1.4, 4) {$2$};
+			\node [left=.2 of -u] {$u$};
+			\foreach \i in {0,1}{
+				\node (-element\i) [rectangle, draw, fill=white, minimum size=1cm] at ($(1.4,2)-(0,\i)$) {};
+			}
+			\node[left=-.1 of -element0] {$min$};
+			\node[left=-.1 of -element1] {$max$};
+			\coordinate (-inp) at (1,5);
+	   },
+	},
+}
+
 \title[略タイトル]{van Emde Boas Trees}
 \author[Mitsuyoshi]{光吉　健汰}
 \institute[IKN]{北海道大学工学部 情報エレクトロニクス学科 情報理工学コース 4年\\
@@ -112,14 +201,48 @@
 	]
 \end{frame}
 \section{前回の復習}
-\import{texfiles/}{arasuji}
-\import{texfiles/}{sqrt-refine}
+  \frame<beamer>{
+  \frametitle{Contents}
+  \tableofcontents[
+    sectionstyle=show/shaded,
+    subsectionstyle=show/show/shaded,
+    subsubsectionstyle=show/show/show/shaded
+    ]
+ }
+%\import{texfiles/}{arasuji}
+%\import{texfiles/}{sqrt-refine}
 \section{Proto van Emde Boas structures}
-\import{texfiles/pvEB/}{pveb}
-\import{texfiles/pvEB/}{member}
+  \frame<beamer>{
+  \frametitle{Contents}
+  \tableofcontents[
+    sectionstyle=show/shaded,
+    subsectionstyle=show/show/shaded,
+    subsubsectionstyle=show/show/show/shaded
+    ]
+ }
+%\import{texfiles/pvEB/}{pveb}
+%\import{texfiles/pvEB/}{member}
+\import{texfiles/pvEB/}{min}
+%\import{texfiles/pvEB/}{successor}
+%\import{texfiles/pvEB/}{insert}
+%\import{texfiles/pvEB/}{delete}
+%\import{texfiles/pvEB/}{runningtime}
+%\import{texfiles/pvEB/}{refine}
 \section{van Emde Boas tree}
-\begin{frame}
-	test
-\end{frame}
+  \frame<beamer>{
+  \frametitle{Contents}
+  \tableofcontents[
+    sectionstyle=show/shaded,
+    subsectionstyle=show/show/shaded,
+    subsubsectionstyle=show/show/show/shaded
+    ]
+ }
+%\import{texfiles/vEB/}{vEB}
+%\import{texfiles/vEB/}{member}
+%\import{texfiles/vEB/}{successor}
+%\import{texfiles/vEB/}{insert}
+%\import{texfiles/vEB/}{delete}
+%\import{texfiles/vEB/}{runningtime}
+%\import{texfiles/}{matome}
 
 \end{document}

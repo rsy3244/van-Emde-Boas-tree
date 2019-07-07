@@ -38,19 +38,25 @@
 \usepackage{usermacro}
 }{}
 \begin{document}
-\begin{frame}\frametitle{pvEB構造 操作: $\Member(V,x)$}
-	$summary$から対応する$cluster$が空か確認し,\\
-	空でないなら対応する$cluster$で$\Member(V,x)$を再帰的に呼び出す.
+\begin{frame}\frametitle{pvEB構造 操作: $\Min(V)$}
+	$summary$に対して$\Min(V.summary)$を呼び出し, \\
+	返り値を$mincluster$とすると,\\
+	$\Min(V.cluster[mincluster])$を再帰的に呼び出す.\\
+	再帰関数の返り値$ret$はそのpvEB構造に対応した値なので,\\
+	返す値は, $\Func{index}(mincluster, ret)$となる.
 
 	\begin{figure}\resizebox{\textwidth}{!}{
-			\subimport{../../resources/pvEB/}{member}
+			\subimport{../../resources/pvEB/}{min}
 		}
-		\caption{$\Member(V,5), V = \{2,3,5,8,11\}$}
+		\caption{$\Min(V,5), V = \{2,3,5,8,11\}$}
 	\end{figure}
 	\begin{tikzpicture}[overlay]
-	    \onslide*<1>{\pic at (6,4.5) {myCallout={$\Member(root, 5)$ dir 1,-1}};}
-		\onslide*<2>{\pic at (7,3.5) {myCallout={$\Member(cluster[1], 1)$ dir 1,-1}};}
-		\onslide*<3>{\pic at (6.34,3.2) {myCallout={$\Member(cluster[0], 1)$ dir 1,1}};}
+		\draw (0,0) grid (30,30);
+	    \onslide*<1>{\pic at (6,4.8) {myCallout={$\Min(root)$ dir 2,0}};}
+	    \onslide*<2>{\pic at (6,4.8) {myCallout={$\Min(summary)$ dir 3.5,0}};}
+	    \onslide*<3>{\pic at (2.9,4) {myCallout={$\Min(summary)$ dir 2,1}};}
+		\onslide*<5>{\pic at (2.9,4) {myCallout={$\Min(cluster[0])$ dir 2,1}};}
+		\onslide*<7>{\pic at (6,4.8) {myCallout={$\Min(cluster[0])$ dir 2,0}};}
 	\end{tikzpicture}
 \end{frame}
 \end{document}

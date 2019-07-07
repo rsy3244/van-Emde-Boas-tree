@@ -1,0 +1,83 @@
+\documentclass[beamer,dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage{usermacro}
+\IfStandalone{
+%%%% 和文用 %%%%%
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{minijs}%和文用
+\usepackage{latexsym}
+\usepackage[deluxe,expert]{otf}
+\renewcommand{\kanjifamilydefault}{\gtdefault}%和文用
+%%%%%%%%
+
+%%%% スライドの見た目 %%%%%
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent=0}%好みに応じてどうぞ）
+\setbeamertemplate{footline}[page number]
+\setbeamerfont{footline}{size=\footnotesize,series=\bfseries}
+\setbeamercolor{footline}{fg=black,bg=black}
+\usepackage{multicol}
+\colorlet{mycolor}{orange!80!black}
+\usepackage{caption}
+\captionsetup[figure]{format=plain, labelformat=empty, labelsep=none}
+\renewcommand{\figurename}{}
+%%%%%%%%
+
+%%%%% フォント基本設定 %%%%%
+\usepackage[T1]{fontenc}%8bit フォント
+\usepackage{textcomp}%欧文フォントの追加
+\usepackage[utf8]{inputenc}%文字コードをUTF-8
+\usepackage{txfonts}%数式・英文ローマン体を txfont にする
+\usepackage{bm}%数式太字
+%%%%%%%%%%
+\usepackage{usermacro}
+}{}
+\begin{document}
+\begin{frame}\frametitle{vEB木 計算量\uniqnum{3}}
+    \onslide*<1>{
+        \begin{block}{$\Member(V,x)$}
+            関数内での再帰呼び出しは$1$回以下なので, 時間計算量は \structure{$O(\Func{loglog}u)$}
+        \end{block}
+    %}
+
+    %\onslide*<2>{
+        \begin{block}{$\Min(V)$}
+			各vEBノードは$min$, $max$の値を保持しているので, \\
+			時間計算量は\structure{$O(1)$}
+        \end{block}
+    %}
+
+    %\onslide*<3>{
+        \begin{block}{$\Successor(V,x)$}
+			関数内では, 再帰呼び出しは常に$1$回以下となる. \\
+			また, $\Min(V)$の呼び出しを行うが, これは定数時間で処理可能なので, \\
+			$\Successor(V,x)$の時間計算量は\structure{$O(\Func{loglog}u)$}
+        \end{block}
+    }
+
+    %\onslide*<4>{
+	\onslide*<2>{
+        \begin{block}{$\Insert(V,x)$}
+            $\Insert(V,x)$は$summary$, $cluster$それぞれに\\再帰呼び出しをすることがあるが,\\
+			$summary$に対して挿入処理を行うとき, $cluster$への挿入処理は, \\
+			その$cluster$の$min$, $max$ を更新しか行わず, \\定数時間で処理可能である. \\
+			よって, $\Insert(V,x)$の時間計算量は\structure{$O(\Func{loglog}u)$}
+
+        \end{block}
+    }
+    %\onslide*<5>{
+	\onslide*<3>{
+        \begin{block}{$\Delete(V,x)$}
+			$\Delete(V,x)$も, $\Insert(V,x)$と同様に, \\$summary$, $cluster$に対し再帰呼び出しをすることがあるが,\\
+			$summary$に対して, 削除を行うとき, $cluster$への削除処理は, \\
+			その$cluster$の$min$, $max$を$\NIL$に置き換えるだけである. \\
+			よって, $\Delete(V,x)$の時間計算量は\structure{$O(\Func{loglog}u)$}
+        \end{block}
+    }
+\end{frame}
+\end{document}

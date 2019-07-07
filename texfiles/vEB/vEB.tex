@@ -1,7 +1,7 @@
-\documentclass[beamer,dvipdfmx,12pt]{standalone}
+\documentclass[dvipdfmx,12pt]{standalone}
 \usepackage[subpreambles=true]{standalone}
 \usepackage{import}
-\usepackage{usermacro}
+
 \IfStandalone{
 %%%% 和文用 %%%%%
 \usepackage{bxdpx-beamer}
@@ -28,6 +28,20 @@
 \renewcommand{\figurename}{}
 %%%%%%%%
 
+%%%% 定義環境 %%%%%
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem{definition}{定義}
+\newtheorem{proposition}{命題}
+\newtheorem{lemma}{補題}
+\newtheorem{corollary}{系}
+\newtheorem{conjecture}{予想}
+\newtheorem*{remark}{Remark}
+\renewcommand{\proofname}{}
+%%%%%%%%%
+
 %%%%% フォント基本設定 %%%%%
 \usepackage[T1]{fontenc}%8bit フォント
 \usepackage{textcomp}%欧文フォントの追加
@@ -35,22 +49,31 @@
 \usepackage{txfonts}%数式・英文ローマン体を txfont にする
 \usepackage{bm}%数式太字
 %%%%%%%%%%
+
 \usepackage{usermacro}
 }{}
-\begin{document}
-\begin{frame}\frametitle{pvEB構造 操作: $\Member(V,x)$}
-	$summary$から対応する$cluster$が空か確認し,\\
-	空でないなら対応する$cluster$で$\Member(V,x)$を再帰的に呼び出す.
 
+\begin{document}
+\begin{frame}\frametitle{van Emde Boas tree}
+\onslide*<1>{
+	pvEB構造に\structure{最小値}, \structure{最大値}を加えたvan Emde Boas treeを考える.
+	\begin{block}{van Emde Boas tree}
+	    van Emde Boas tree ( vEB木 ) は, \\
+	    van Emde Boas node ( vEBノード) で構成されるデータ構造\\
+		\begin{itemize}
+			\item 各vEBノードはpvEB構造と同様の変数に加え, \\
+			そのノードが持つ要素の最小値, 最大値を保持
+			\item $u = 2$の場合は, ポインタを持たず, 最小値, 最大値のみを保持\\
+			\item 最小値の要素は, 子のノードに持たせない\\
+		\end{itemize}
+	\end{block}
+}
+\onslide*<2>{
 	\begin{figure}\resizebox{\textwidth}{!}{
-			\subimport{../../resources/pvEB/}{member}
+			\subimport{../../resources/vEB/}{node}
 		}
-		\caption{$\Member(V,5), V = \{2,3,5,8,11\}$}
+		\caption{van Emde Boas tree \\$V = \{2,3,5,8,11\}$}
 	\end{figure}
-	\begin{tikzpicture}[overlay]
-	    \onslide*<1>{\pic at (6,4.5) {myCallout={$\Member(root, 5)$ dir 1,-1}};}
-		\onslide*<2>{\pic at (7,3.5) {myCallout={$\Member(cluster[1], 1)$ dir 1,-1}};}
-		\onslide*<3>{\pic at (6.34,3.2) {myCallout={$\Member(cluster[0], 1)$ dir 1,1}};}
-	\end{tikzpicture}
+}
 \end{frame}
 \end{document}

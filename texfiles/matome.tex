@@ -1,0 +1,27 @@
+\documentclass[dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage{usermacro}
+
+\begin{document}
+\begin{frame}\frametitle{まとめ}
+	\begin{itemize}
+		\item 平方分割木から, 再帰的な構造であるpvEB構造を考えた.\\
+		\item pvEB構造の各操作の時間計算量は, 以下の通りとなった. \\
+			\begin{tabular}{|r|l|r|l|}\hline
+				操作 & 時間計算量 & 操作 & 時間計算量 \\\hline
+				$\Member(V,x)$ & $O(\log \log u)$ & $\Successor(V,x)$ & $O(\log u\log \log u)$ \\
+				$\Min(V,x)$    & $O(\log u)$ 	 & $\Predecessor(V,x)$ & $O(\log u\log \log u)$ \\
+				$\Max(V,x)$	   & $O(\log u)$	 & $\Insert(V,x)$	& $\Theta(\log u)$ \\
+							   &					 & $\Delete(V,x)$	& $O(\sqrt{u}\log \log u)$\\\hline
+			\end{tabular}
+	\end{itemize}
+	\begin{itemize}
+		\item pvEB構造に$min$, $max$の変数を持たせたvEB木を考えた. \\
+		\item $\Min(V,x)$, $\Max(V,x)$ が定数時間で処理可能となったことから, \\
+			他の操作の時間計算量は$O(\log \log u)$ を達成した. \\
+	\end{itemize}
+\end{frame}
+
+
+\end{document}

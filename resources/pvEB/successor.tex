@@ -10,6 +10,7 @@
 	pics/pvebset/.style args={#1 color #2}{
 		code={
 		    \pgfmathtruncatemacro{\Usize}{#1 * #1}
+		    \coordinate (-root) at (0,0);
 		   	\draw [pic actions, fill=#2!5](0,0) rectangle ($(4.5,2)+(#1,0)$);
 			\node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1,.5) {\Usize};
 			\node [above=.2 of -u] {$u$};
@@ -29,8 +30,13 @@
 		draw,
         minimum size=1cm,
    },
+   highlight/.style={
+        plane,
+        fill=green!5,
+   },
    pics/pvebbase/.style args={color #1} {
 	   code={
+    	    \coordinate (-root) at (0,0);
 		   \draw [pic actions, fill=#1!5] (0,0) rectangle (2,5);
 		   \node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1.4, 4) {$2$};
 		   \node [left=.2 of -u] {$u$};
@@ -72,31 +78,42 @@
 	\addtocounter{xbase}{1}
 	\pic (sum-cl1) at ({\thexbase*2.5},1) {pvebbase={color blue}};
 	\addtocounter{xbase}{1}
-	\drawkakukaku{summary}{summary}{sum-sum}{-.6}
-	\drawkakukaku{summary}{cluster0}{sum-cl0}{-.7}
-	\drawkakukaku{summary}{cluster1}{sum-cl1}{-.8}
-
+	
 
 	\foreach \i in {0,1,2,3} {
 		\pic (cl\i) at ({9+7*\i},7) {pvebset={2 color blue}};
-		\pgfmathsetmacro {\j}{.1*\i}
-		\coordinate (belowcluster\i) at ($(vebnode-cluster\i.center) + (0,-.9+\j)$);
-		\coordinate (belowcluster\i-1) at ($(belowcluster\i)+(1,0)$);
-		\coordinate (cl\i-inp1) at ($(cl\i-inp)+(0,1)$);
-		\coordinate (cl\i-cross) at (intersection of belowcluster\i--belowcluster\i-1 and cl\i-inp--cl\i-inp1);
-		\draw[->,very thick] (vebnode-cluster\i.center) -- (belowcluster\i) -- (cl\i-cross) -- (cl\i-inp);
+		%\pgfmathsetmacro {\j}{.1*\i}
+		%\coordinate (belowcluster\i) at ($(vebnode-cluster\i.center) + (0,-.9+\j)$);
+		%\coordinate (belowcluster\i-1) at ($(belowcluster\i)+(1,0)$);
+		%\coordinate (cl\i-inp1) at ($(cl\i-inp)+(0,1)$);
+		%\coordinate (cl\i-cross) at (intersection of belowcluster\i--belowcluster\i-1 and cl\i-inp--cl\i-inp1);
+		%\draw[->,very thick] (vebnode-cluster\i.center) -- (belowcluster\i) -- (cl\i-cross) -- (cl\i-inp);
 
 		\pic (cl\i-sum) at ({\thexbase*2.5},1) {pvebbase={color red}};
 		\addtocounter{xbase}{1}
-		\drawkakukaku{cl\i}{summary}{cl\i-sum}{-.6}
 
 		\foreach \j in {0,1} {
 			\pic (cl\i-\j) at ({\thexbase*2.5}, 1) {pvebbase={color blue}};
 			\addtocounter{xbase}{1}
-			\pgfmathsetmacro{\jfloat}{-0.1*\j-.7}
-			\drawkakukaku{cl\i}{cluster\j}{cl\i-\j}{\jfloat}
+			%\pgfmathsetmacro{\jfloat}{-0.1*\j-.7}
+			%\drawkakukaku{cl\i}{cluster\j}{cl\i-\j}{\jfloat}
 		}
 	}
+	
+    \IfStandalone{
+    }{  
+        \onslide*<1>{\pic at (vebnode-root) {pvebset={4 color green}};}
+        \onslide*<2>{\pic at (cl1-root) {pvebset={2 color green}};}
+        \onslide*<3>{\pic at (cl1-0-root) {pvebbase={color green}};}
+        \onslide*<4>{\pic at (cl1-sum-root) {pvebbase={color green}};}
+        \onslide*<5>{\pic at (summary-root) {pvebset={2 color green}};}
+        \onslide*<6>{\pic at (sum-cl0-root) {pvebbase={color green}};}
+        \onslide*<7>{\pic at (sum-sum-root) {pvebbase={color green}};}
+        \onslide*<8>{\pic at (sum-cl1-root) {pvebbase={color green}};}
+        \onslide*<10>{\pic at (cl2-root) {pvebset={2 color green}};}
+        \onslide*<11>{\pic at (cl2-sum-root) {pvebbase={color green}};}
+        \onslide*<13>{\pic at (cl2-0-root) {pvebbase={color green}};}
+    }
 	
 	\node[plane] at (sum-sum-element0) {$1$}; %0-7
 	\node[plane] at (sum-sum-element1) {$1$}; %8-15
@@ -128,7 +145,26 @@
 	\node[plane] at (cl3-0-element1) {$0$}; %13
 	\node[plane] at (cl3-1-element0) {$0$}; %14
 	\node[plane] at (cl3-1-element1) {$0$}; %15
-
-
+	
+	\IfStandalone{}{
+	    \onslide*<9>{\node[highlight] at (sum-cl1-element0) {$1$};}
+	    \onslide*<12>{\node[highlight] at (cl2-sum-element0) {$1$};}
+	    \onslide*<14>{\node[highlight] at (cl2-0-element0) {$1$};}
+	}
+    
+	\drawkakukaku{vebnode}{summary}{summary}{-.6}
+	\drawkakukaku{summary}{summary}{sum-sum}{-.6}
+	\drawkakukaku{summary}{cluster0}{sum-cl0}{-.7}
+	\drawkakukaku{summary}{cluster1}{sum-cl1}{-.8}
+	\foreach \i in {0,1,2,3} {
+		\pgfmathsetmacro {\j}{.1*\i}
+	    \drawkakukaku{vebnode}{cluster\i}{cl\i}{{-.9+\j}}
+		\drawkakukaku{cl\i}{summary}{cl\i-sum}{-.6}
+		\foreach \j in {0,1}{
+		    \pgfmathsetmacro{\jfloat}{-.1*\j-.7}
+			\drawkakukaku{cl\i}{cluster\j}{cl\i-\j}{\jfloat}
+		}
+	}
+	
 \end{tikzpicture}
 \end{document}

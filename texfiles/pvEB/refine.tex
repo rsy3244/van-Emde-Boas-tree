@@ -38,19 +38,16 @@
 \usepackage{usermacro}
 }{}
 \begin{document}
-\begin{frame}\frametitle{pvEB構造 操作: $\Member(V,x)$}
-	$summary$から対応する$cluster$が空か確認し,\\
-	空でないなら対応する$cluster$で$\Member(V,x)$を再帰的に呼び出す.
-
-	\begin{figure}\resizebox{\textwidth}{!}{
-			\subimport{../../resources/pvEB/}{member}
-		}
-		\caption{$\Member(V,5), V = \{2,3,5,8,11\}$}
-	\end{figure}
-	\begin{tikzpicture}[overlay]
-	    \onslide*<1>{\pic at (6,4.5) {myCallout={$\Member(root, 5)$ dir 1,-1}};}
-		\onslide*<2>{\pic at (7,3.5) {myCallout={$\Member(cluster[1], 1)$ dir 1,-1}};}
-		\onslide*<3>{\pic at (6.34,3.2) {myCallout={$\Member(cluster[0], 1)$ dir 1,1}};}
-	\end{tikzpicture}
+\begin{frame}\frametitle{pvEB構造 欠点}
+    \begin{itemize}
+        \item $\Min(V)$は, $summary$, $cluster$両方に対し再帰的に処理\\
+        \onslide+<2->{\hspace{2em}$\to$\structure{再帰呼び出しは$1$回まで}\\}
+        \item $\Successor(V,x)$は, 上に加え$\Min(V,x)$を処理\\
+        \onslide+<2->{\hspace{2em}$\to$\structure{再帰呼び出しは$1$回まで}\\}
+        \item $\Insert(V,x)$は, $summary$, $cluster$両方を再帰的に更新\\
+        \onslide+<3->{\hspace{2em}$\to$\structure{更新処理を最低限に}\\}
+        \item $\Delete(V,x)$は, $cluster$の線形処理がボトルネック\\
+        \onslide+<4->{\hspace{2em}$\to$\structure{要素がないかを定数時間で判定}\\}
+    \end{itemize}
 \end{frame}
 \end{document}

@@ -2,6 +2,57 @@
 \usepackage[subpreambles=true]{standalone}
 \usepackage{import}
 
+\IfStandalone{
+%%%% 和文用 %%%%%
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{minijs}%和文用
+\usepackage{latexsym}
+\usepackage[deluxe,expert]{otf}
+\renewcommand{\kanjifamilydefault}{\gtdefault}%和文用
+%%%%%%%%
+
+%%%% スライドの見た目 %%%%%
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent=0}%好みに応じてどうぞ）
+\setbeamertemplate{footline}[page number]
+\setbeamerfont{footline}{size=\footnotesize,series=\bfseries}
+\setbeamercolor{footline}{fg=black,bg=black}
+\usepackage{multicol}
+\colorlet{mycolor}{orange!80!black}
+\usepackage{caption}
+\captionsetup[figure]{format=plain, labelformat=empty, labelsep=none}
+\renewcommand{\figurename}{}
+%%%%%%%%
+
+%%%% 定義環境 %%%%%
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem{definition}{定義}
+\newtheorem{proposition}{命題}
+\newtheorem{lemma}{補題}
+\newtheorem{corollary}{系}
+\newtheorem{conjecture}{予想}
+\newtheorem*{remark}{Remark}
+\renewcommand{\proofname}{}
+%%%%%%%%%
+
+%%%%% フォント基本設定 %%%%%
+\usepackage[T1]{fontenc}%8bit フォント
+\usepackage{textcomp}%欧文フォントの追加
+\usepackage[utf8]{inputenc}%文字コードをUTF-8
+\usepackage{txfonts}%数式・英文ローマン体を txfont にする
+\usepackage{bm}%数式太字
+%%%%%%%%%%
+
+\usepackage{usermacro}
+}{}
+
 \begin{document}
 \begin{frame}\frametitle{proto van Emde Boas structures}
 \onslide*<1>{
@@ -16,7 +67,9 @@
 			\item pvEB構造間で対応する要素の値が異なるので, \\
 				以下の式を用いてやり取りを行う.\\
 				\begin{description}[$index(x,y)$]
-					\item[$index(x,y)$] こんなかんじ\\
+				    \item[$\Func{high}(x)$] $= \lfloor \frac{x}{\sqrt{u}}\rfloor$\\
+				    \item[$\Func{low}(x)$] $= x \Func{mod} \sqrt{u}$
+					\item[$\Func{index}(x,y)$] $= x\sqrt{u} + y$\\
 				\end{description}
 		\end{itemize}
 	\end{block}

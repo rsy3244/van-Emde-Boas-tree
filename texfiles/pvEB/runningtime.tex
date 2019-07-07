@@ -1,0 +1,109 @@
+\documentclass[beamer,dvipdfmx,12pt]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage{usermacro}
+\IfStandalone{
+%%%% 和文用 %%%%%
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{minijs}%和文用
+\usepackage{latexsym}
+\usepackage[deluxe,expert]{otf}
+\renewcommand{\kanjifamilydefault}{\gtdefault}%和文用
+%%%%%%%%
+
+%%%% スライドの見た目 %%%%%
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent=0}%好みに応じてどうぞ）
+\setbeamertemplate{footline}[page number]
+\setbeamerfont{footline}{size=\footnotesize,series=\bfseries}
+\setbeamercolor{footline}{fg=black,bg=black}
+\usepackage{multicol}
+\colorlet{mycolor}{orange!80!black}
+\usepackage{caption}
+\captionsetup[figure]{format=plain, labelformat=empty, labelsep=none}
+\renewcommand{\figurename}{}
+%%%%%%%%
+
+%%%%% フォント基本設定 %%%%%
+\usepackage[T1]{fontenc}%8bit フォント
+\usepackage{textcomp}%欧文フォントの追加
+\usepackage[utf8]{inputenc}%文字コードをUTF-8
+\usepackage{txfonts}%数式・英文ローマン体を txfont にする
+\usepackage{bm}%数式太字
+%%%%%%%%%%
+\usepackage{usermacro}
+}{}
+\begin{document}
+\begin{frame}\frametitle{pvEB構造 計算量\uniqnum{5}}
+    \onslide*<1>{
+        \begin{block}{空間計算量}
+            pvEB構造は自身の$u$について, $\sqrt{u}+1$個のポインタを持つ.\\
+            よって, 全体の空間計算量を$\Func{S}(u)$とすると, \\
+            \begin{equation*}
+            \Func{S}(u) = (\sqrt{u}+1)\Func{S}(\sqrt{u}) + \Theta(\sqrt{u})
+            \end{equation*}
+            となる. よって, 以下が成り立つ.\\
+            \begin{equation*}
+				\Func{S}(u) \leq \left( \prod_{i=1}^{\Func{loglog}u} (u^{2^{-i}}+1)\right)\Func{S}(2) + \sum_{i=1}^{\Func{loglog}u}\Theta(u^{2^{-i}})(u^{2^{-i}}+1)
+            \end{equation*}
+            
+        \end{block}
+    }
+
+    \onslide*<2>{
+        \begin{block}{$\Member(V,x)$}
+            $\Member(V,x)$は, 根に相当するpvEB構造から葉まで探索するので, 時間計算量は \structure{$O(\Func{loglog}u)$}
+        \end{block}
+    }
+
+    \onslide*<3>{
+        \begin{block}{$\Min(V)$}
+            $\Min(V)$は, 時間計算量を$\Func{T}(u)$とすると, 以下のように導出できる. \\
+            \begin{eqnarray*}
+                \Func{T}(u) &=& 2\Func{T}(\sqrt{u}) + O(1) \\
+                \Func{S}(m) &:=& \Func{T}(2^{m}) \text{とすると,}\\
+                \Func{S}(m) &=& 2\Func{S}\left(\frac{m}{2} \right) + O(1)\\
+                \Func{S}(m) &=& \Theta(m)\\
+                \Func{T}(u) &=& \Func{T}(2^{m}) = \Func{S}(m) = \Theta(m) = \alert{\Theta(\log u)}\\
+                %master method
+            \end{eqnarray*}
+        \end{block}
+    }
+
+    \onslide*<4>{
+        \begin{block}{$\Successor(V,x)$}
+            $\Successor(V,x)$は, $1$回の処理で, $\Successor(summary,high(x))$,\\
+            $\Successor(cluster[high(x)], low(x))$を呼び出す. \\
+            また, $\Min(V')$も呼び出すので時間計算量$\Func{T}(u)$は以下の式となる.
+            $\Min(V)$と同様に導出する. 
+            \begin{eqnarray*}
+                \Func{T}(u) &=& 2\Func{T}(\sqrt{u}) + \Theta(\Func{log}u)\\
+                \Func{S}(m) &=& 2\Func{S}\left( \frac{m}{2} \right) + \Theta(m)\\
+                \Func{S}(m) &=& O(m\log m) \\
+                \Func{T}(u) &=& \Func{S}(m) = O(m\log m) = \alert{O(\log u\log \log u)}\\
+            \end{eqnarray*}
+        \end{block}
+    }
+
+    \onslide*<5>{
+        \begin{block}{$\Insert(V,x)$}
+            $\Insert(V,x)$は$summary$, $cluster$それぞれに再帰的に処理を行うので, \\
+            $\Min(V)$と同様に時間計算量は\alert{$\Theta(\Func{log}u)$}となる.
+        \end{block}
+    }
+
+    \onslide*<5>{
+        \begin{block}{$\Delete(V,x)$}
+            $\Delete(V,x)$は, $cluster$で更新後, \\
+            $cluster$に要素がないか確認する必要がある. \\
+            $cluster$は$\sqrt{u}$個の要素を持ち, \\
+            それぞれに$\Member(cluster[\Func{high}(x)],i)$で確認するので,\\
+            時間計算量は\alert{$O(\sqrt{u}\Func{loglog}u)$}となる.
+        \end{block}
+    }
+\end{frame}
+\end{document}

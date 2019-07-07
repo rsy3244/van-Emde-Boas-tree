@@ -38,19 +38,24 @@
 \usepackage{usermacro}
 }{}
 \begin{document}
-\begin{frame}\frametitle{pvEB構造 操作: $\Member(V,x)$}
-	$summary$から対応する$cluster$が空か確認し,\\
-	空でないなら対応する$cluster$で$\Member(V,x)$を再帰的に呼び出す.
+\begin{frame}\frametitle{vEB木 操作: $\Insert(V,x)$}
+    $min$が$\NIL$の場合, $min$と$max$を$x$に更新して終了する.\\
+    $x$が$min$より小さければ$x$と$min$を交換し,\\ 今後$min$であった値について更新する.\\
+    対応する$cluster$の最小値が$\NIL$の場合, \\
+    $\Insert(summary, \Func{high}(x))$を行う.\\
+    $\Insert(cluser[\Func{high}(x)], \Func{low}(x))$を実行し終了する.
+    
 
 	\begin{figure}\resizebox{\textwidth}{!}{
-			\subimport{../../resources/pvEB/}{member}
+			\subimport{../../resources/vEB/}{insert}
 		}
-		\caption{$\Member(V,5), V = \{2,3,5,8,11\}$}
+		\caption{$\Insert(V,4), V = \{2,3,5,8,11\}$}
 	\end{figure}
-	\begin{tikzpicture}[overlay]
-	    \onslide*<1>{\pic at (6,4.5) {myCallout={$\Member(root, 5)$ dir 1,-1}};}
-		\onslide*<2>{\pic at (7,3.5) {myCallout={$\Member(cluster[1], 1)$ dir 1,-1}};}
-		\onslide*<3>{\pic at (6.34,3.2) {myCallout={$\Member(cluster[0], 1)$ dir 1,1}};}
-	\end{tikzpicture}
+	%\begin{tikzpicture}[overlay]
+	%    \onslide*<1>{
+    		%\node[ellipse callout, thick, draw, fill=white, callout absolute pointer={(6,4.5)}] at (7,3.5) {$\Member(V,5)$};
+    		%\pic ["$\Member(V,5)$"] at (6,4.5) {myCallout};
+	%	}
+	%\end{tikzpicture}
 \end{frame}
 \end{document}

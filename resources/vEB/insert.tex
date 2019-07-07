@@ -1,0 +1,174 @@
+\documentclass[dvipdfmx,12pt]{standalone}
+\usepackage[]{standalone}
+\usepackage{import}
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.pathreplacing,quotes,positioning,shapes,fit,arrows,backgrounds,tikzmark}
+\IfStandalone{
+	\usepackage{usermacro}
+\tikzset{
+   %vebset/.pic={
+	pics/vebset/.style args={#1 color #2}{
+		code={
+		    \pgfmathtruncatemacro{\Usize}{#1 * #1}
+		    \coordinate (-root) at (0,0);
+		   	\draw [pic actions, fill=#2!5](0,0) rectangle ($(4.5,3)+(#1,0)$);
+			\node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1,.5) {\Usize};
+			\node [above=.2 of -u] {$u$};
+			\node (-summary) [rectangle, draw, fill=white, minimum size=1cm] at (2.5,.5) {};
+			\node [above=.1 of -summary] {$summary$};
+			\node at (1.5, 2.3) {$min$};
+			\node (-min) [plane] at (2.5, 2.3) {};
+			\node at (4.5, 2.3) {$max$};
+			\node (-max) [plane] at (5.5, 2.3) {};
+			\foreach \i in {1,2,...,#1}{
+				\pgfmathtruncatemacro{\j}{\i-1}
+				\node (-cluster\j)[rectangle, draw, fill=white,minimum size=1cm] at ($(\j, 0)+(4.5,0.5)$) {};
+			}
+			\node [above=.1 of -cluster0.north east] {$cluster$};
+			\coordinate (-inp) at ({4.5/2+#1/2},3);
+		},
+   },
+   plane/.style={
+        rectangle,
+		fill=white,
+		draw,
+        minimum size=1cm,
+   },
+   highlight/.style={
+        plane,
+        fill=green!5,
+   },
+   pics/vebbase/.style args={color #1} {
+	   code={
+            \draw [pic actions, fill=#1!5] (0,0) rectangle (2,5);
+            \coordinate (-root) at (0,0);
+            \node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1.4, 4) {$2$};
+            \node [left=.2 of -u] {$u$};
+            \foreach \i in {0,1}{
+                \node (-element\i) [rectangle, draw, fill=white, minimum size=1cm] at ($(1.4,2)-(0,\i)$) {};
+            }
+            \node[left=-.1 of -element0] {$min$};
+            \node[left=-.1 of -element1] {$max$};
+            \coordinate (-inp) at (1,5);
+	   },
+   },
+}
+
+}{
+}
+
+%#1: 始点の名前 #2: 始点の箇所 #3: 終点の名前
+\providecommand{\drawkakukaku}[4]{
+	\coordinate (below#2) at ($(#1-#2.center)+(0,#4)$);
+	\coordinate (below#2-1) at ($(below#2)+(1,0)$);
+	\coordinate (#3-inp1) at ($(#3-inp)+(0,1)$);
+	\coordinate (#1-cross) at (intersection of below#2--below#2-1 and #3-inp--#3-inp1);
+	\draw[->,very thick] (#1-#2.center) -- (below#2) -- (#1-cross) -- (#3-inp);
+}
+
+\begin{document}
+\begin{tikzpicture}
+    \pic (vebnode) at (10,10) {vebset={4 color blue}};
+    \pic (summary) at (2,6) {vebset={2 color red}};
+	\setcounter{xbase}{0}
+	\pic (sum-sum) at ({\thexbase*2.5},0) {vebbase={color red}};
+	\addtocounter{xbase}{1}
+	\pic (sum-cl0) at ({\thexbase*2.5},0) {vebbase={color blue}};
+	\addtocounter{xbase}{1}
+	\pic (sum-cl1) at ({\thexbase*2.5},0) {vebbase={color blue}};
+	\addtocounter{xbase}{1}
+
+
+	\foreach \i in {0,1,2,3} {
+		\pic (cl\i) at ({9+7*\i},6) {vebset={2 color blue}};
+
+		\pic (cl\i-sum) at ({\thexbase*2.5},0) {vebbase={color red}};
+		\addtocounter{xbase}{1}
+
+		\foreach \j in {0,1} {
+			\pic (cl\i-\j) at ({\thexbase*2.5}, 0) {vebbase={color blue}};
+			\addtocounter{xbase}{1}
+		}
+	}
+	
+	\IfStandalone{}{
+        \onslide*<1>{\pic at (vebnode-root) {vebset={4 color green}};}
+        \onslide*<2>{\pic at (cl1-root) {vebset={2 color green}};}
+        \onslide*<4>{\pic at (cl1-0-root) {vebbase={color green}};}
+        \onslide*<6>{\pic at (cl1-sum-root) {vebbase={color green}};}
+        \onslide*<8>{\pic at (cl1-0-root) {vebbase={color green}};}
+	}
+	
+	\node[plane] at (vebnode-min) {$2$}; %0-15(0-15)
+	\node[plane] at (vebnode-max) {$11$}; %0-15(0-15)
+	\node[plane] at (summary-min) {$0$}; %0-15(0-3)
+	\node[plane] at (summary-max) {$2$}; %0-15(0-3)
+	\node[plane] at (cl0-min) {$3$}; %0-3(0-3)
+	\node[plane] at (cl0-max) {$3$}; %0-3(0-3)
+	\node[plane] at (cl1-min) {$1$}; %4-7(0-3)
+	\node[plane] at (cl1-max) {$1$}; %4-7(0-3)
+	\node[plane] at (cl2-min) {$0$}; %8-11(0-3)
+	\node[plane] at (cl2-max) {$3$}; %8-11(0-3)
+	\node[plane] at (cl3-min) {$\NIL$}; %12-15(0-3)
+	\node[plane] at (cl3-max) {$\NIL$}; %12-15(0-3)
+	
+	\node[plane] at (sum-sum-element0) {$0$}; %0-15
+	\node[plane] at (sum-sum-element1) {$1$}; %0-15
+	\node[plane] at (sum-cl0-element0) {$1$}; %0-7
+	\node[plane] at (sum-cl0-element1) {$1$}; %0-7
+	\node[plane] at (sum-cl1-element0) {$0$}; %8-15
+	\node[plane] at (sum-cl1-element1) {$0$}; %8-15
+	\node[plane] at (cl0-sum-element0) {$\NIL$}; %0-3
+	\node[plane] at (cl0-sum-element1) {$\NIL$}; %0-3
+	\node[plane] at (cl0-0-element0) {$\NIL$}; %0
+	\node[plane] at (cl0-0-element1) {$\NIL$}; %1
+	\node[plane] at (cl0-1-element0) {$\NIL$}; %2
+	\node[plane] at (cl0-1-element1) {$\NIL$}; %3
+	\node[plane] at (cl1-sum-element0) {$\NIL$}; %4-5
+	\node[plane] at (cl1-sum-element1) {$\NIL$}; %6-7
+	\node[plane] at (cl1-0-element0) {$\NIL$}; %4
+	\node[plane] at (cl1-0-element1) {$\NIL$}; %5
+	\node[plane] at (cl1-1-element0) {$\NIL$}; %6
+	\node[plane] at (cl1-1-element1) {$\NIL$}; %7
+	\node[plane] at (cl2-sum-element0) {$1$}; %8-9
+	\node[plane] at (cl2-sum-element1) {$1$}; %10-11
+	\node[plane] at (cl2-0-element0) {$\NIL$}; %8
+	\node[plane] at (cl2-0-element1) {$\NIL$}; %9
+	\node[plane] at (cl2-1-element0) {$1$}; %10
+	\node[plane] at (cl2-1-element1) {$1$}; %11
+	\node[plane] at (cl3-sum-element0) {$\NIL$}; %12-13
+	\node[plane] at (cl3-sum-element1) {$\NIL$}; %14-15
+	\node[plane] at (cl3-0-element0) {$\NIL$}; %12
+	\node[plane] at (cl3-0-element1) {$\NIL$}; %13
+	\node[plane] at (cl3-1-element0) {$\NIL$}; %14
+	\node[plane] at (cl3-1-element1) {$\NIL$}; %15
+	
+	\IfStandalone{}{
+	    \onslide*<3>{\node[highlight] at (cl1-min) {$0$};}
+	    \onslide*<4->{\node[plane] at (cl1-min) {$0$};}
+	    \onslide*<5>{\node[highlight] at (cl1-0-element0) {$\NIL$};}
+	    \onslide*<7>{\node[highlight] at (cl1-sum-element0) {$0$};}
+	    \onslide*<7>{\node[highlight] at (cl1-sum-element1) {$0$};}
+	    \onslide*<8->{\node[plane] at (cl1-sum-element0) {$0$};}
+	    \onslide*<8->{\node[plane] at (cl1-sum-element1) {$0$};}
+	    \onslide*<9>{\node[highlight] at (cl1-0-element0) {$1$};}
+	    \onslide*<9>{\node[highlight] at (cl1-0-element1) {$1$};}
+	}
+	
+	\drawkakukaku{vebnode}{summary}{summary}{-.6}
+	\drawkakukaku{summary}{summary}{sum-sum}{-.6}
+	\drawkakukaku{summary}{cluster0}{sum-cl0}{-.7}
+	\drawkakukaku{summary}{cluster1}{sum-cl1}{-.8}
+	\foreach \i in {0,1,2,3} {
+		\pgfmathsetmacro {\j}{.1*\i}
+	    \drawkakukaku{vebnode}{cluster\i}{cl\i}{{-.9+\j}}
+		\drawkakukaku{cl\i}{summary}{cl\i-sum}{-.6}
+		\foreach \j in {0,1}{
+		    \pgfmathsetmacro{\jfloat}{-.1*\j-.7}
+			\drawkakukaku{cl\i}{cluster\j}{cl\i-\j}{\jfloat}
+		}
+	}
+
+
+\end{tikzpicture}
+\end{document}
