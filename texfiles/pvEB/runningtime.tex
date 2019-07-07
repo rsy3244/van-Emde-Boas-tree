@@ -48,19 +48,23 @@
             \end{equation*}
             となる. よって, 以下が成り立つ.\\
             \begin{equation*}
-				\Func{S}(u) \leq \left( \prod_{i=1}^{\Func{loglog}u} (u^{2^{-i}}+1)\right)\Func{S}(2) + \sum_{i=1}^{\Func{loglog}u}\Theta(u^{2^{-i}})(u^{2^{-i}}+1)
+				\Func{S}(u) \leq \left( \prod_{i=1}^{\log \log  u} \left(u^{2^{-i}}+1 \right)\right)\Func{S}(2) + \sum_{i=1}^{\log \log  u}\left( \sum_{j=1}^{i}\left(u^{2^{-j}}+1 \right)\Theta \left(u^{2^{-i}} \right)\right)
             \end{equation*}
-            
+			上式より, \\
+			\begin{equation*}
+				\Func{S}(u) = \alert{O(u \log \log u)}
+			\end{equation*}
         \end{block}
+		{\small 実際には, $\Func{S}(u) = O(u)$ となるそうですが, わかりませんでした.}
     }
 
     \onslide*<2>{
         \begin{block}{$\Member(V,x)$}
-            $\Member(V,x)$は, 根に相当するpvEB構造から葉まで探索するので, 時間計算量は \structure{$O(\Func{loglog}u)$}
+            $\Member(V,x)$は, 根に相当するpvEB構造から葉まで探索するので, 時間計算量は \structure{$O(\log \log  u)$}
         \end{block}
-    }
+    %}
 
-    \onslide*<3>{
+    %\onslide*<3>{
         \begin{block}{$\Min(V)$}
             $\Min(V)$は, 時間計算量を$\Func{T}(u)$とすると, 以下のように導出できる. \\
             \begin{eqnarray*}
@@ -74,14 +78,14 @@
         \end{block}
     }
 
-    \onslide*<4>{
+    \onslide*<3>{
         \begin{block}{$\Successor(V,x)$}
             $\Successor(V,x)$は, $1$回の処理で, $\Successor(summary,high(x))$,\\
             $\Successor(cluster[high(x)], low(x))$を呼び出す. \\
             また, $\Min(V')$も呼び出すので時間計算量$\Func{T}(u)$は以下の式となる.
             $\Min(V)$と同様に導出する. 
             \begin{eqnarray*}
-                \Func{T}(u) &=& 2\Func{T}(\sqrt{u}) + \Theta(\Func{log}u)\\
+                \Func{T}(u) &=& 2\Func{T}(\sqrt{u}) + \Theta(\log u)\\
                 \Func{S}(m) &=& 2\Func{S}\left( \frac{m}{2} \right) + \Theta(m)\\
                 \Func{S}(m) &=& O(m\log m) \\
                 \Func{T}(u) &=& \Func{S}(m) = O(m\log m) = \alert{O(\log u\log \log u)}\\
@@ -89,10 +93,10 @@
         \end{block}
     }
 
-    \onslide*<5>{
+    \onslide*<3>{
         \begin{block}{$\Insert(V,x)$}
             $\Insert(V,x)$は$summary$, $cluster$それぞれに再帰的に処理を行うので, \\
-            $\Min(V)$と同様に時間計算量は\alert{$\Theta(\Func{log}u)$}となる.
+            $\Min(V)$と同様に時間計算量は\alert{$\Theta(\log u)$}となる.
         \end{block}
     }
 
@@ -102,7 +106,7 @@
             $cluster$に要素がないか確認する必要がある. \\
             $cluster$は$\sqrt{u}$個の要素を持ち, \\
             それぞれに$\Member(cluster[\Func{high}(x)],i)$で確認するので,\\
-            時間計算量は\alert{$O(\sqrt{u}\Func{loglog}u)$}となる.
+            時間計算量は\alert{$O(\sqrt{u}\log \log  u)$}となる.
         \end{block}
     }
 \end{frame}

@@ -41,7 +41,7 @@
 \begin{frame}\frametitle{vEB木 計算量\uniqnum{3}}
     \onslide*<1>{
         \begin{block}{$\Member(V,x)$}
-            関数内での再帰呼び出しは$1$回以下なので, 時間計算量は \structure{$O(\Func{loglog}u)$}
+            関数内での再帰呼び出しは$1$回以下なので, 時間計算量は \structure{$O(\log \log  u)$}
         \end{block}
     %}
 
@@ -56,7 +56,7 @@
         \begin{block}{$\Successor(V,x)$}
 			関数内では, 再帰呼び出しは常に$1$回以下となる. \\
 			また, $\Min(V)$の呼び出しを行うが, これは定数時間で処理可能なので, \\
-			$\Successor(V,x)$の時間計算量は\structure{$O(\Func{loglog}u)$}
+			$\Successor(V,x)$の時間計算量は\structure{$O(\log \log  u)$}
         \end{block}
     }
 
@@ -66,7 +66,7 @@
             $\Insert(V,x)$は$summary$, $cluster$それぞれに\\再帰呼び出しをすることがあるが,\\
 			$summary$に対して挿入処理を行うとき, $cluster$への挿入処理は, \\
 			その$cluster$の$min$, $max$ を更新しか行わず, \\定数時間で処理可能である. \\
-			よって, $\Insert(V,x)$の時間計算量は\structure{$O(\Func{loglog}u)$}
+			よって, $\Insert(V,x)$の時間計算量は\structure{$O(\log \log  u)$}
 
         \end{block}
     }
@@ -76,7 +76,7 @@
 			$\Delete(V,x)$も, $\Insert(V,x)$と同様に, \\$summary$, $cluster$に対し再帰呼び出しをすることがあるが,\\
 			$summary$に対して, 削除を行うとき, $cluster$への削除処理は, \\
 			その$cluster$の$min$, $max$を$\NIL$に置き換えるだけである. \\
-			よって, $\Delete(V,x)$の時間計算量は\structure{$O(\Func{loglog}u)$}
+			よって, $\Delete(V,x)$の時間計算量は\structure{$O(\log \log  u)$}
         \end{block}
     }
 \end{frame}

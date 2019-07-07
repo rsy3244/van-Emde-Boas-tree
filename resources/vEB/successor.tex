@@ -90,14 +90,14 @@
 			\addtocounter{xbase}{1}
 		}
 	}
-	
+
 	\IfStandalone{}{
         \onslide*<1>{\pic at (vebnode-root) {vebset={4 color green}};}
-        \onslide*<3>{\pic at (cl1-root) {vebset={2 color green}};}
-        \onslide*<5>{\pic at (summary-root) {vebset={2 color green}};}
-        \onslide*<8>{\pic at (sum-sum-root) {vebbase={color green}};}
-        \onslide*<10>{\pic at (sum-cl1-root) {vebbase={color green}};}
-        \onslide*<12>{\pic at (cl2-root) {vebset={2 color green}};}
+        \onslide*<4>{\pic at (cl1-root) {vebset={2 color green}};}
+        \onslide*<6>{\pic at (summary-root) {vebset={2 color green}};}
+        \onslide*<9>{\pic at (sum-sum-root) {vebbase={color green}};}
+        \onslide*<11>{\pic at (sum-cl1-root) {vebbase={color green}};}
+        \onslide*<13>{\pic at (cl2-root) {vebset={2 color green}};}
 	}
 	
 	\node[plane] at (vebnode-min) {$2$}; %0-15(0-15)
@@ -147,12 +147,13 @@
 	
 	\IfStandalone{}{
 	    \onslide*<2>{\node[highlight] at (vebnode-min) {$2$};}
-	    \onslide*<4>{\node[highlight] at (cl1-max) {$1$};}
-	    \onslide*<6>{\node[highlight] at (summary-min) {$0$};}
-	    \onslide*<7>{\node[highlight] at (summary-max) {$2$};}
-	    \onslide*<9>{\node[highlight] at (sum-sum-element1) {$1$};}
-	    \onslide*<11>{\node[highlight] at (sum-cl1-element0) {$0$};}
-	    \onslide*<13>{\node[highlight] at (cl2-min) {$0$};}
+	    \onslide*<3>{\node[highlight] at (vebnode-max) {$11$};}
+	    \onslide*<5>{\node[highlight] at (cl1-max) {$1$};}
+	    \onslide*<7>{\node[highlight] at (summary-min) {$0$};}
+	    \onslide*<8>{\node[highlight] at (summary-max) {$2$};}
+	    \onslide*<10>{\node[highlight] at (sum-sum-element1) {$1$};}
+	    \onslide*<12>{\node[highlight] at (sum-cl1-element0) {$0$};}
+	    \onslide*<14>{\node[highlight] at (cl2-min) {$0$};}
 	}
 	
 	\drawkakukaku{vebnode}{summary}{summary}{-.6}

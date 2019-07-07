@@ -50,10 +50,17 @@
 		\caption{$\Successor(V,5), V = \{2,3,5,8,11\}$}
 	\end{figure}
 	\begin{tikzpicture}[overlay]
-	    \onslide*<1>{
-    		%\node[ellipse callout, thick, draw, fill=white, callout absolute pointer={(6,4.5)}] at (7,3.5) {$\Member(V,5)$};
-    		%\pic ["$\Member(V,5)$"] at (6,4.5) {myCallout};
-		}
+	    \onslide*<1>{\pic at (6,4.8) {myCallout={$\Successor(root, 5)$ dir 4,0}};}
+		\onslide*<2>{\pic at (6,4.8) {myCallout={$\Successor(cluster[1], 1)$ dir 4,0}};}
+		\onslide*<3>{\pic at (7,4.2) {myCallout={$\Successor(cluster[0], 1)$ dir 2.5,1}};}
+		\onslide*<4>{\pic at (7,4.2) {myCallout={$\Successor(summary, 0)$ dir 2.5,1}};}
+	    \onslide*<5>{\pic at (6,4.8) {myCallout={$\Successor(summary, 1)$ dir 4,0}};}
+		\onslide*<6>{\pic at (2.8,4) {myCallout={$\Successor(cluster[0], 1)$ dir 3,1}};}
+		\onslide*<7>{\pic at (2.8,4) {myCallout={$\Successor(summary, 0)$ dir 3,1}};}
+		\onslide*<8>{\pic at (2.8,4) {myCallout={$\Min(cluster[1])$ dir 3,1}};}
+		\onslide*<10>{\pic at (6,4.8) {myCallout={$\Min(cluster[2])$ dir 4,0}};}
+		\onslide*<11>{\pic at (7.2,4) {myCallout={$\Min(summary)$ dir -3,0}};}
+		\onslide*<13>{\pic at (7.2,4) {myCallout={$\Min(cluster[0])$ dir -3,0}};}
 	\end{tikzpicture}
 \end{frame}
 \end{document}

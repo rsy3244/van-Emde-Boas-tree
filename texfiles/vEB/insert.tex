@@ -41,8 +41,7 @@
 \begin{frame}\frametitle{vEB木 操作: $\Insert(V,x)$}
     $min$が$\NIL$の場合, $min$と$max$を$x$に更新して終了する.\\
     $x$が$min$より小さければ$x$と$min$を交換し,\\ 今後$min$であった値について更新する.\\
-    対応する$cluster$の最小値が$\NIL$の場合, \\
-    $\Insert(summary, \Func{high}(x))$を行う.\\
+    対応する$cluster$の最小値が$\NIL$の場合, $\Insert(summary, \Func{high}(x))$を行う.\\
     $\Insert(cluser[\Func{high}(x)], \Func{low}(x))$を実行し終了する.
     
 
@@ -51,11 +50,16 @@
 		}
 		\caption{$\Insert(V,4), V = \{2,3,5,8,11\}$}
 	\end{figure}
-	%\begin{tikzpicture}[overlay]
-	%    \onslide*<1>{
-    		%\node[ellipse callout, thick, draw, fill=white, callout absolute pointer={(6,4.5)}] at (7,3.5) {$\Member(V,5)$};
-    		%\pic ["$\Member(V,5)$"] at (6,4.5) {myCallout};
-	%	}
-	%\end{tikzpicture}
+	\begin{tikzpicture}[overlay]
+		%\draw (0,0) grid (30,30);
+		%\node at (5,0) {5};
+		%\node at (0,5) {5};
+		%\node at (0,0) {\uniqnum{9}};
+	    \onslide*<1>{\pic at (6,5) {myCallout={$\Insert(root, 4)$ dir 3,0}};}
+		\onslide*<2>{\pic at (6,5) {myCallout={$\Insert(cluster[1], 0)$ dir 3,0}};}
+		\onslide*<4>{\pic at (7,4.3) {myCallout={$\Min(cluster[0])$ dir 1,1}};}
+		\onslide*<6>{\pic at (7,4.3) {myCallout={$\Insert(summary, 0)$ dir 1,1}};}
+		\onslide*<8>{\pic at (7,4.3) {myCallout={$\Insert(cluster[0], 0)$ dir 1,1}};}
+	\end{tikzpicture}
 \end{frame}
 \end{document}

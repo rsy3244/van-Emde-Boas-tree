@@ -104,7 +104,7 @@
     },
 	highlight/.style={
 		plane,
-		fill=green!5,
+		fill=green!10,
 	},%
 %
 	pics/myCallout/.style args={#1 dir #2}{
@@ -116,7 +116,7 @@
 		code={
 			\pgfmathtruncatemacro{\Usize}{#1 * #1}
 			\coordinate (-root) at (0,0);
-			\draw [pic actions, fill=#2!5](0,0) rectangle ($(4.5,2)+(#1,0)$);
+			\draw [pic actions, fill=#2!10](0,0) rectangle ($(4.5,2)+(#1,0)$);
 			\node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1,.5) {\Usize};
 			\node [above=.2 of -u] {$u$};
 			\node (-summary) [rectangle, draw, fill=white, minimum size=1cm] at (2.5,.5) {};
@@ -132,7 +132,7 @@
 	pics/pvebbase/.style args={color #1} {
 	   code={
 			\coordinate (-root) at (0,0);
-		   \draw [pic actions, fill=#1!5] (0,0) rectangle (2,5);
+		   \draw [pic actions, fill=#1!10] (0,0) rectangle (2,5);
 		   \node (-u) [rectangle, draw, fill=white, minimum size=1cm] at (1.4, 4) {$2$};
 		   \node [left=.2 of -u] {$u$};
 		   \foreach \i in {0,1}{
@@ -209,8 +209,8 @@
     subsubsectionstyle=show/show/show/shaded
     ]
  }
-%\import{texfiles/}{arasuji}
-%\import{texfiles/}{sqrt-refine}
+\import{texfiles/}{arasuji}
+\import{texfiles/}{sqrt-refine}
 \section{Proto van Emde Boas structures}
   \frame<beamer>{
   \frametitle{Contents}
@@ -220,14 +220,14 @@
     subsubsectionstyle=show/show/show/shaded
     ]
  }
-%\import{texfiles/pvEB/}{pveb}
-%\import{texfiles/pvEB/}{member}
+\import{texfiles/pvEB/}{pveb}
+\import{texfiles/pvEB/}{member}
 \import{texfiles/pvEB/}{min}
-%\import{texfiles/pvEB/}{successor}
-%\import{texfiles/pvEB/}{insert}
-%\import{texfiles/pvEB/}{delete}
-%\import{texfiles/pvEB/}{runningtime}
-%\import{texfiles/pvEB/}{refine}
+\import{texfiles/pvEB/}{successor}
+\import{texfiles/pvEB/}{insert}
+\import{texfiles/pvEB/}{delete}
+\import{texfiles/pvEB/}{runningtime}
+\import{texfiles/pvEB/}{refine}
 \section{van Emde Boas tree}
   \frame<beamer>{
   \frametitle{Contents}
@@ -237,12 +237,12 @@
     subsubsectionstyle=show/show/show/shaded
     ]
  }
-%\import{texfiles/vEB/}{vEB}
-%\import{texfiles/vEB/}{member}
-%\import{texfiles/vEB/}{successor}
-%\import{texfiles/vEB/}{insert}
-%\import{texfiles/vEB/}{delete}
-%\import{texfiles/vEB/}{runningtime}
-%\import{texfiles/}{matome}
+\import{texfiles/vEB/}{vEB}
+\import{texfiles/vEB/}{member}
+\import{texfiles/vEB/}{successor}
+\import{texfiles/vEB/}{insert}
+\import{texfiles/vEB/}{delete}
+\import{texfiles/vEB/}{runningtime}
+\import{texfiles/}{matome}
 
 \end{document}

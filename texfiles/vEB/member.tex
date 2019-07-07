@@ -48,10 +48,12 @@
 		\caption{$\Member(V,5), V = \{2,3,5,8,11\}$}
 	\end{figure}
 	\begin{tikzpicture}[overlay]
-	    \onslide*<1>{
-    		%\node[ellipse callout, thick, draw, fill=white, callout absolute pointer={(6,4.5)}] at (7,3.5) {$\Member(V,5)$};
-    		%\pic ["$\Member(V,5)$"] at (6,4.5) {myCallout};
-		}
+		%\draw (0,0) grid (30,30);
+		%\node at (5,0) {5};
+		%\node at (0,5) {5};
+		%\node at (0,0) {\uniqnum{11}};
+	    \onslide*<1>{\pic at (6,5) {myCallout={$\Member(root, 5)$ dir 3,-1}};}
+		\onslide*<2>{\pic at (6,5.4) {myCallout={$\Member(cluster[1], 1)$ dir 4,0}};}
 	\end{tikzpicture}
 \end{frame}
 \end{document}
